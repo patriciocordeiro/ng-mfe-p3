@@ -10,19 +10,9 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "paths": {
-      "auth-app-mfe-lib": [
-        "dist/auth-app-mfe-lib/auth-app-mfe-lib",
-        "dist/auth-app-mfe-lib",
-        "dist/auth-app-mfe-lib/auth-app-mfe-lib",
-        "dist/auth-app-mfe-lib"
-      ],
       "home-app-mfe-lib": [
         "dist/home-app-mfe-lib/home-app-mfe-lib",
         "dist/home-app-mfe-lib"
-      ],
-      "login-app-mfe": [
-        "dist/login-app-mfe/login-app-mfe",
-        "dist/login-app-mfe"
       ],
       "user-app-mfe-lib": [
         "dist/user-app-mfe-lib/user-app-mfe-lib",
