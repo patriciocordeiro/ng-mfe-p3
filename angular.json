@@ -419,7 +419,10 @@
               "projects/auth-app/src/assets"
             ],
             "styles": [
-              "projects/auth-app/src/styles.scss"
+              "projects/auth-app/src/styles.scss",
+              {
+                "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+              }
             ],
             "scripts": []
           },

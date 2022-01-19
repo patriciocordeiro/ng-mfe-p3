@@ -1,0 +1,70 @@
+<div
+  class="login-container"
+  fxLayout="row"
+  fxLayoutAlign.xs="center start"
+  fxLayoutAlign="center center"
+>
+  <div class="" fxFlex="95%" fxFlex.sm="75%" fxFlex.gt-sm="500px">
+    <div>
+      <!-- <div *ngIf="loading$ | async as loading">
+        <mat-progress-bar class="progress-bar" mode="indeterminate"></mat-progress-bar>
+      </div> -->
+
+      <form (ngSubmit)="login()" [formGroup]="form" novalidate>
+        <div fxLayout="column">
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <span class="mat-display-1">Welcome back</span>
+          </div>
+          <p>
+            <mat-form-field fxFlex appearance="fill">
+              <mat-label>E-mail</mat-label>
+              <input matInput formControlName="email" />
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field fxFlex appearance="fill">
+              <mat-label>Password</mat-label>
+              <input
+                matInput
+                formControlName="password"
+                [type]="hidePassword ? 'password' : 'text'"
+              />
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="hidePassword = !hidePassword"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hidePassword"
+              >
+                <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-error *ngIf="loginError$ | async as error">
+              {{ error.message }}
+            </mat-error>
+          </p>
+          <button [disabled]="loading$ | async" mat-flat-button color="primary" type="submit">
+            <ng-container *ngIf="loading$ | async; else elseTemplate">
+              <div fxLayout="row" fxLayoutAlign="center center">
+                <mat-spinner [diameter]="36"></mat-spinner>
+              </div>
+            </ng-container>
+            <ng-template #elseTemplate> Login</ng-template>
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="create-account" fxLayout="row" fxLayoutAlign="center center">
+      <a
+        mat-button
+        color="primary"
+        [routerLink]="['../signup']"
+        routerLinkActive="router-link-active"
+        [disabled]="loading$ | async"
+        >Create account
+      </a>
+    </div>
+  </div>
+</div>
