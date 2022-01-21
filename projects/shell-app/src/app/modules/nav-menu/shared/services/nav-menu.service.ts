@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { collection, collectionData, Firestore } from '@angular/fire/firestore';
-import { ActivatedRoute, NavigationStart, Route, Router } from '@angular/router';
+import { NavigationStart, Route, Router, RouterState } from '@angular/router';
 import { loadModule } from 'projects/shell-app/src/app/shared/utils/load-module.util';
 import { from, Observable } from 'rxjs';
 import { filter, map, mergeMap, takeLast, tap, toArray } from 'rxjs/operators';
@@ -16,7 +16,6 @@ export class NavMenuService {
 
   constructor(
     private router: Router,
-    private activatedRoute: ActivatedRoute,
     private firestore: Firestore,
   ) { }
 
@@ -28,15 +27,25 @@ export class NavMenuService {
   }
 
   addMenuToRouterConfig(menuList: NavMenu[]): Observable<Route[]> {
+
+    const currentUrlIndex = this.router.config.findIndex(e => e.path === this.rootRoutePath);
+
     return from(menuList).pipe(
       filter(item => item.active),
       map(item => {
+
         const route: Route = this.builDynamicRoutesFromMicroFrontend(item);
-        const idx = this.router.config.length ? this.router.config.findIndex(e => e.path == route.path) : -1;
+
+        const config = this.router.config as any;
+
+        let children = config[currentUrlIndex]._loadedConfig.routes[0].children as Route[];
+
+        const idx = children.findIndex(el => el.path == route.path);
+
         if (idx < 0) {
-          if (this.router.config)
-            this.router.config = [...this.router.config, route];
+          config[currentUrlIndex]._loadedConfig.routes[0].children = [...config[currentUrlIndex]._loadedConfig.routes[0].children, route];
         }
+        this.router.config = config;
         return this.router.config;
       }
       ),
@@ -46,7 +55,10 @@ export class NavMenuService {
         tap(() => {
           this.redirectHandler(menuList);
         }),
-        map(res => res[0])
+        map(res => {
+          const routes = res[0][currentUrlIndex] as any;
+          return routes._loadedConfig.routes[0].children.filter((e: Route) => !!e.path) || [];
+        })
       );
   }
 
@@ -60,25 +72,32 @@ export class NavMenuService {
   }
 
   redirectHandler(menuList: NavMenu[]) {
-    const activeMenuList = menuList.filter(e =>  e.active);
-    const firstPageToLoad = activeMenuList.filter(e =>  e.isFirstPage)[0] || activeMenuList[0];
 
-    if (this.currentURL) {
-      this.router.navigate([`./${this.currentURL}`], { relativeTo: this.activatedRoute, replaceUrl: true });
+    const activeMenuList = menuList.filter(e => e.active);
+    const firstPageToLoad = activeMenuList.filter(e => e.isFirstPage)[0] || activeMenuList[0];
+
+    if (this.currentURL && this.currentURL != `/${this.rootRoutePath}`) {
+      this.router.navigate([`./${this.currentURL}`], { replaceUrl: true });
     } else {
-      this.router.navigate([`./${firstPageToLoad?.path}`], { relativeTo: this.activatedRoute, replaceUrl: true });
+      this.router.navigate([`./${this.rootRoutePath}/${firstPageToLoad?.path}`], { replaceUrl: true });
     }
   }
 
   handleRedirectOnReload(router: Router) {
     return router.events
-      .pipe(filter((rs): rs is NavigationStart => rs instanceof NavigationStart))
+      .pipe(
+        filter((rs): rs is NavigationStart => rs instanceof NavigationStart))
       .pipe(tap(event => {
-        if (event.id === 1 && event.url != '/') {
+        if (event.id === 1 && event.url !== '/' && event.url !== '/auth/login') {
           this.currentURL = event.url;
-          this.router.navigate(['/'], { relativeTo: this.activatedRoute });
         }
       }));
+  }
+
+  private get rootRoutePath(): string {
+    const state: RouterState = this.router.routerState;
+    return state.root.children[0].routeConfig?.path || '';
+
   }
 
 }

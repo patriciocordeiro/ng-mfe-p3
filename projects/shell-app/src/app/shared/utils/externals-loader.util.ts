@@ -27,7 +27,11 @@ export function externalsLoader(production: boolean) {
   (window as any).ng.flexLayout.flex = require('@angular/flex-layout/flex');
   (window as any).rxjs = require('rxjs');
   (window as any).rxjs.operators = require('rxjs/operators');
-
+  (window as any).rxjs.operators = require('rxjs/operators');
+  (window as any)['@ngrx/store'] = require('@ngrx/store');
+  (window as any)['@ngrx/effects'] = require('@ngrx/effects');
+  (window as any)['@ngrx/entity'] = require('@ngrx/entity');
+  (window as any)['authAppLib'] = require('auth-app-lib');
   if (!production) {
     (window as any).ng.platformBrowserDynamic = require('@angular/platform-browser-dynamic');
     (window as any).ng.compiler = require('@angular/compiler');

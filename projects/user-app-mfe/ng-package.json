@@ -2,7 +2,8 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/user-app-mfe-lib",
   "lib": {
-    "entryFile": "src/public-api.ts"
+    "entryFile": "src/public-api.ts",
+    "umdModuleIds": {"@ngrx/store": "@ngrx/store"}
   },
   "assets": ["./src/assets/"]
 }

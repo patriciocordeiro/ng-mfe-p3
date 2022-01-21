@@ -15,6 +15,9 @@ export const selectAuthEntities = createSelector(
 export const selectAllAuth = createSelector(selectAuthState, state => {
   return fromAuth.authSelectAll(state);
 });
+export const selectAuthUser = createSelector(selectAllAuth, state => {
+  return state && state[0];
+});
 
 
 export const selectAuthLoading = createSelector(selectAuthState, state => state.loading);

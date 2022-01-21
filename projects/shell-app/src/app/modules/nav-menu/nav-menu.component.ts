@@ -22,7 +22,7 @@ export class NavMenuComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription.add(this.navMenuService.handleRedirectOnReload(this.router).subscribe());
+    // this.subscription.add(this.navMenuService.handleRedirectOnReload(this.router).subscribe());
     this.menuItems$ = this.navMenuService.getMenu();
   }
   ngOnDestroy(): void {

@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build:home-app-lib": "ng build home-app-mfe-lib && cp ./dist/home-app-mfe-lib/bundles/home-app-mfe-lib.umd.js ./projects/shell-app/src/assets/",
     "build:user-app-lib": "ng build user-app-mfe-lib  && cp ./dist/user-app-mfe-lib/bundles/user-app-mfe-lib.umd.js ./projects/shell-app/src/assets/",
+    "build:auth-app-lib": "ng build auth-app-lib &&  cd  ./dist/auth-app-lib/ && npm pack && cd ../../ &&  cp ./dist/auth-app-lib/auth-app-lib-0.0.1.tgz packages  && npm i auth-app-lib",
     "serve:home-app": "ng serve home-app-mfe --o",
     "serve:user-app": "ng serve user-app-mfe --o",
     "serve:auth-app": "ng serve auth-app --o",
@@ -32,6 +33,7 @@
     "@ngrx/entity": "^12.5.1",
     "@ngrx/store": "^12.5.1",
     "@ngrx/store-devtools": "^12.5.1",
+    "auth-app-lib": "file:packages/auth-app-lib-0.0.1.tgz",
     "firebase": "^9.6.3",
     "rxfire": "^6.0.0",
     "rxjs": "~6.6.0",
@@ -54,6 +56,7 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "ng-packagr": "^12.1.1",
+    "shelljs": "^0.8.5",
     "typescript": "~4.3.5"
   }
 }

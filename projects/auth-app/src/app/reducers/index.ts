@@ -1,7 +1,8 @@
 import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
 
 import { environment } from '../../environments/environment';
-import { authLogout } from './../auth/shared/store/auth.actions';
+import { authLogout } from '../auth/shared/store/auth.actions';
+
 
 
 export interface State {

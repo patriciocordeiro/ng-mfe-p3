@@ -1,7 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-
-import { User } from './../../../../../../../dist/user-app-mfe-lib/app/user/shared/interfaces/user.d';
-
+import firebase from 'firebase/compat';
 
 export const authLogin = createAction(
   '[Auth] Login', props<{ email: string, password: string; }>()
@@ -23,7 +21,7 @@ export const authSignup = createAction(
 
 export const authSignupSuccess = createAction(
   '[Auth] Signup  Success',
-  props<{ data: firebase.default.User | null; }>()
+  props<{ data: firebase.User | null; }>()
 );
 
 export const authSignupFailure = createAction(
@@ -41,9 +39,9 @@ export const authLogoutFailure = createAction(
   '[Auth] Auth Logout Failure',
   props<{ error: any; }>()
 );
-export const authSetIsLoggedIn = createAction(
-  '[Auth] Auth Set IsLoggedIn ',
-  props<{ data: boolean; }>()
+export const authSetLoggedUser = createAction(
+  '[Auth] Auth Set Logged User ',
+  props<{ data: firebase.User }>()
 );
 
 

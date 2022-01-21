@@ -9,13 +9,14 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { initializeApp } from 'firebase/app';
-import { environment } from 'projects/shell-app/src/environments/environment';
 
+import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthEffects } from './auth/shared/store/auth.effects';
 import * as authReducer from './auth/shared/store/auth.reducer';
 import { metaReducers, reducers } from './reducers';
+
 
 @NgModule({
   declarations: [

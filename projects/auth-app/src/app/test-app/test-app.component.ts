@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { authLogout, selectAuthUser } from 'auth-app-lib';
 import firebase from 'firebase/compat';
 import { Observable } from 'rxjs';
 
+import { authLogout } from '../auth/shared/store/auth.actions';
+import { selectAuthUser } from '../auth/shared/store/auth.selectors';
+
+
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  selector: 'app-test-app',
+  templateUrl: './test-app.component.html',
+  styleUrls: ['./test-app.component.scss']
 })
-export class UserComponent implements OnInit {
+export class TestAppComponent implements OnInit {
+
   user$!: Observable<firebase.User>;
 
-  constructor(
-    private store: Store,
-  ) { }
+  constructor(private store: Store<{ auth: firebase.User; }>) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.getLoggedUser();
   }
 
@@ -25,7 +27,9 @@ export class UserComponent implements OnInit {
     this.store.dispatch(authLogout());
   }
 
+
   private getLoggedUser() {
     this.user$ = this.store.select(selectAuthUser);
   }
+
 }

@@ -5,20 +5,21 @@ import firebase from 'firebase/compat';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss']
 })
-export class UserComponent implements OnInit {
+export class DashboardComponent implements OnInit {
+
   user$!: Observable<firebase.User>;
 
-  constructor(
-    private store: Store,
-  ) { }
+  constructor(private store: Store) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.getLoggedUser();
   }
+
+
 
 
   logout() {

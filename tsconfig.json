@@ -10,6 +10,10 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "paths": {
+      "auth-app-lib": [
+        "dist/auth-app-lib/auth-app-lib",
+        "dist/auth-app-lib"
+      ],
       "home-app-mfe-lib": [
         "dist/home-app-mfe-lib/home-app-mfe-lib",
         "dist/home-app-mfe-lib"

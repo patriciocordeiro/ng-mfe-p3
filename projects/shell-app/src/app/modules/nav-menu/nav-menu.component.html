@@ -1,19 +1,11 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
-      <div fxFlex>
-        <span class="mat-title">Micro Frontend using angular library: Part 1</span>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
-        <a
-          mat-button
-          *ngFor="let item of this.menuItems$ | async"
-          [routerLink]="['./' + item.path]"
-          routerLinkActive="router-link-active"
-        >
-          {{ item?.data?.title | uppercase }}
-        </a>
-      </div>
-    </div>
-  </mat-toolbar-row>
-</mat-toolbar>
+
+  <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+    <a
+      mat-button
+      *ngFor="let item of this.menuItems$ | async"
+      [routerLink]="['./' + item.path]"
+      routerLinkActive="router-link-active"
+    >
+      {{ item?.data?.title | uppercase }}
+    </a>
+  </div>

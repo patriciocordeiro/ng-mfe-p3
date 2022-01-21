@@ -5,11 +5,13 @@ import firebase from 'firebase/compat';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  selector: 'app-user-test-app',
+  templateUrl: './user-test-app.component.html',
+  styleUrls: ['./user-test-app.component.scss']
 })
-export class UserComponent implements OnInit {
+
+export class UserTestAppComponent implements OnInit {
+
   user$!: Observable<firebase.User>;
 
   constructor(

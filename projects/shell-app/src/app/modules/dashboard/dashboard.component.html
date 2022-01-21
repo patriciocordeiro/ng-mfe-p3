@@ -1,0 +1,31 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxFlex>
+        <span class="mat-title">Micro Frontend using angular library</span>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="36px">
+        <app-nav-menu></app-nav-menu>
+        <div>
+          <button mat-button [matMenuTriggerFor]="menuRef">
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+              <mat-icon class="mat-18">person_outline</mat-icon>
+              <div *ngIf="this.user$ | async as user">
+                <span class="mat-body-1">{{ user.displayName }} </span>
+              </div>
+            </div>
+          </button>
+
+          <mat-menu #menuRef="matMenu">
+            <button mat-menu-item (click)="logout()">
+              <mat-icon class="mat-18">logout</mat-icon>
+              Logout
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+<router-outlet></router-outlet>
